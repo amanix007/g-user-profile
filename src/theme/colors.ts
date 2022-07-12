@@ -1,8 +1,8 @@
-const variables = {
+const colors = {
   black: '#000',
   white: '#fff',
   primary: {
-    main: '#713BDB',
+    main: '#017eb7',
   },
   secondary: {
     light: '#61678F',
@@ -19,4 +19,4 @@ const variables = {
   lineColor: '#e0e2f1',
 }
 
-export default variables
+export default colors

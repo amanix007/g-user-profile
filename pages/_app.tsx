@@ -7,6 +7,7 @@ import { CacheProvider, EmotionCache } from '@emotion/react'
 import theme from '../src/theme'
 import createEmotionCache from '../src/createEmotionCache'
 import DrawerMenuWrapper from '../src/components/ui/DrawerMenuWrapper/DrawerMenuWrapper'
+import "../src/assets/scss/style.scss"
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()

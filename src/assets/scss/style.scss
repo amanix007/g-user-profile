@@ -1,0 +1,64 @@
+//colors
+$black: #000000;
+$white: #ffffff;
+$orange: #ff7733;
+$orangeNew: #ff5a00;
+
+// $primaryColor: #2a8cff;
+// $primaryDarkColor: #245dd8;
+
+$primaryColor: #0b4da2;
+$primaryDarkColor: #093978;
+$primaryLightColor: #336bb5;
+//
+$secondaryColor: $orange;
+$secondaryDarkColor: $orange;
+.profile-form {
+  max-width: 600px;
+}
+.avatar {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  z-index: 1;
+  cursor: pointer;
+  &:hover {
+    .icon {
+      opacity: 1;
+      transition: opacity 0.3s ease-in-out;
+    }
+  }
+  .icon {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    background-color: rgba($color: $primaryColor, $alpha: 0.8);
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .MuiSvgIcon-root {
+      margin: 0 auto;
+      // position: absolute;
+      // left: 50px;
+      // top: 20px;
+      height: 120px;
+      width: 120px;
+      path {
+        fill: #ffffff;
+      }
+    }
+  }
+
+  .MuiAvatar-root {
+    position: relative;
+    z-index: 0;
+    .MuiAvatar-img {
+    }
+  }
+}

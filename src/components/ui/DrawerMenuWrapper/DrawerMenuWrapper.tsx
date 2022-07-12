@@ -24,9 +24,13 @@ import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 
 import { useRouter } from 'next/router'
+import { Box, CssBaseline } from '@mui/material'
+
+const drawerWidth = 240;
+
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
-  open?: boolean
+  open?: boolean;
 }>(({ theme, open }) => ({
   flexGrow: 1,
   padding: theme.spacing(3),
@@ -42,7 +46,8 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
     }),
     marginLeft: 0,
   }),
-}))
+}));
+
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean
@@ -65,7 +70,6 @@ const AppBar = styled(MuiAppBar, {
   }),
 }))
 
-const drawerWidth = 240
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -80,18 +84,19 @@ type Props = {
   children: React.ReactNode
 }
 const menuList = [
+
   {
-    text: 'Overview',
-    icon: <GridViewIcon />,
-    href: '/dashboard-overview',
-  },
-  {
-    text: 'User Account',
+    text: 'Account Details',
     icon: <SupervisedUserCircleIcon />,
     href: '/user-account',
   },
+  {
+    text: 'Update Profile',
+    icon: <GridViewIcon />,
+    href: '/update-profile',
+  },
 ]
-export default function DrawerMenu({ children }: Props) {
+export default function DrawerMenuWrapper({ children }: Props) {
   const [open, setOpen] = React.useState(true)
 
   const handleDrawerOpen = () => {
@@ -104,8 +109,9 @@ export default function DrawerMenu({ children }: Props) {
   const router = useRouter()
   const theme = useTheme()
   return (
-    <>
-      <AppBar position="fixed" open={open}>
+    <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
+      <AppBar position="fixed" open={open} color="primary">
         <Toolbar>
           <IconButton
             color="inherit"
@@ -117,14 +123,11 @@ export default function DrawerMenu({ children }: Props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            nextjs-ts-mui-linting-boilerplate
+            Candidate Dashboard
           </Typography>
         </Toolbar>
       </AppBar>
-      <Main open={open}>
-        <DrawerHeader />
-        {children}
-      </Main>
+
 
       <Drawer
         sx={{
@@ -164,6 +167,10 @@ export default function DrawerMenu({ children }: Props) {
           ))}
         </List>
       </Drawer>
-    </>
+      <Main open={open}>
+        <DrawerHeader />
+        {children}
+      </Main>
+    </Box>
   )
 }
