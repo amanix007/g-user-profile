@@ -140,8 +140,18 @@ export default function UserAccount(props) {
                       {props.values.workExperiences && props.values.workExperiences.length > 0 ? (
                         props.values.workExperiences.map((workExperience, index) => (
                           <div key={index}>
-                            <TextField variant="outlined" name={`workExperiences.${index}.startDate`} />
-                            <TextField variant="outlined" name={`workExperiences.${index}.endDate`} />
+                            <TextField label="Start Date" variant="outlined" name={`workExperiences.${index}.startDate`} />
+                            <TextField label="End Date" variant="outlined" name={`workExperiences.${index}.endDate`} />
+                            <TextField label="Job title" variant="outlined" name={`workExperiences.${index}.jobTitle`} />
+                            <TextField label="Company" variant="outlined" name={`workExperiences.${index}.company`} />
+
+
+                            <TextField label="Job description" variant="outlined" name={`workExperiences.${index}.jobDescription`} />
+                            <TextField label="End Date" variant="outlined" name={`workExperiences.${index}.endDate`} />
+                            <input id={"file" + index} name={`workExperiences.${index}.companyLogo`} type="file" onChange={(event) => {
+                              props.setFieldValue(`workExperiences.${index}.companyLogo`, event.currentTarget.files[0]);
+                            }} className="form-control" />
+                            <Thumb file={props.values.workExperiences[index].companyLogo} />
                             <button
                               type="button"
                               onClick={() => arrayHelpers.remove(index)} // remove a workExperience from the list
@@ -182,4 +192,42 @@ export default function UserAccount(props) {
       }
     </Formik >
   </div >
+}
+
+
+
+class Thumb extends React.Component {
+  state = {
+    loading: false,
+    thumb: undefined,
+  };
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (!nextProps.file) { return; }
+
+    this.setState({ loading: true }, () => {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        this.setState({ loading: false, thumb: reader.result });
+      };
+
+      reader.readAsDataURL(nextProps.file);
+    });
+  }
+
+  render() {
+    const { file } = this.props;
+    const { loading, thumb } = this.state;
+
+    if (!file) { return null; }
+
+    if (loading) { return <p>loading...</p>; }
+
+    return (<img src={thumb}
+      alt={file.name}
+      className="img-thumbnail mt-2"
+      height={200}
+      width={200} />);
+  }
 }
