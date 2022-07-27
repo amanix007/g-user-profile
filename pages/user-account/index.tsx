@@ -39,10 +39,10 @@ export default function UserAccount(props) {
 
   const { status_message } = state;
   const [value, setValue] = React.useState<Date | null>(
-    new Date('2014-08-18T21:11:54'),
+    new Date(),
   );
 
-  const handleChange = (newValue: Date | null) => {
+  const handleDateChange = (newValue: Date | null) => {
     setValue(newValue);
   };
   return <div>
@@ -122,7 +122,7 @@ export default function UserAccount(props) {
                       name="name"
                       label="Name"
                       value={props.values.name}
-                      onChange={props.handleChange}
+                      onChange={props.handleDateChange}
                       error={
                         props.touched.name && Boolean(props.errors.name)
                       }
@@ -160,21 +160,31 @@ export default function UserAccount(props) {
                           {props.values.workExperiences && props.values.workExperiences.length > 0 ? (
                             props.values.workExperiences.map((workExperience, index) => (
                               <div key={index}>
-                                <TextField label="Start Date" variant="outlined"
+                                {/* <TextField label="Start Date" variant="outlined"
                                   value={props.values.workExperiences[index].startDate}
                                   onChange={props.handleChange}
                                   error={
                                     props.touched.age && Boolean(props.errors.age)
                                   }
                                   helperText={props.values.workExperiences[index].startDate && props.errors.workExperiences[index].startDate}
-                                  name={`workExperiences.${index}.startDate`} />
+                                  name={`workExperiences.${index}.startDate`}
+                                   /> */}
 
                                 <DesktopDatePicker
-                                  label="Date desktop"
-                                  inputFormat="MM/dd/yyyy"
+                                  label="Start Date"
+                                  inputFormat="YYYY/MM/DD"
                                   value={value}
-                                  onChange={handleChange}
-                                  renderInput={(params) => <TextField {...params} />}
+                                  onChange={(date) => {
+                                    handleDateChange(date);
+                                  }}
+                                  renderInput={(params) => <TextField {...params}
+                                    error={
+                                      props.touched.age && Boolean(props.errors.age)
+                                    }
+                                    helperText={props.values.workExperiences[index].startDate && props.errors.workExperiences[index].startDate}
+                                    name={`workExperiences.${index}.startDate`}
+
+                                  />}
                                 />
                                 <TextField label="End Date" variant="outlined"
                                   value={props.values.workExperiences[index].endDate}

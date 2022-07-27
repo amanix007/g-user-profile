@@ -21,11 +21,11 @@ export const validationSchema = yup.object({
   workExperiences: yup.array().of(
     yup.object().shape({
       startDate: yup.string().required('startDate required'),
-      endDate: yup.string().required('startDate required'),
-      jobTitle: yup.string().required('startDate required'),
-      company: yup.string().required('startDate required'),
-      companyLogo: yup.string().required('startDate required'),
-      jobDescription: yup.string().required('startDate required'),
+      endDate: yup.string().required('endDate required'),
+      jobTitle: yup.string().required('jobTitle required'),
+      company: yup.string().required('company required'),
+      companyLogo: yup.string().required('companyLogo required'),
+      jobDescription: yup.string().required('jobDescription required'),
 
     })
   ),
